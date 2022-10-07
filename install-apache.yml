@@ -1,0 +1,21 @@
+---
+
+- hosts: docker-ubuntu
+  
+  tasks:
+  - name: update repository index
+    apt:
+      update-cache: yes
+#    when: ansible-distribution == "Ubuntu"
+#    when: ansible-distribution in ["Ubuntu", "Debian"]
+#    when: ansible-distribution == "Ubuntu" and ansible-distribution == "Debian"]
+
+  - name: install apache2 package
+    apt:
+      name: apache2
+      state: latest
+
+  - name: add php support for apache
+    apt:
+      name: libapache2-mod-php
+      state: latest

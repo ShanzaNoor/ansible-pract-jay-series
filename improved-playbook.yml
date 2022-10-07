@@ -1,0 +1,22 @@
+---
+
+- hosts: all
+  become: yes
+  
+  pre_tasks:
+  - name: Install updates (Ubuntu)
+    tags: always
+    apt:
+#      upgrade: dist
+      update-cache: yes
+      when: ansible-distribution == "Ubuntu" 
+  
+  tasks:
+  - name: install apache2 package
+    tags: apache,apach2,httpd,php    
+    package:
+      name:
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
+      state: latest
+      update-cache: yes

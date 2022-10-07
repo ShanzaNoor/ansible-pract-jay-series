@@ -1,0 +1,20 @@
+---
+
+- hosts: docker
+  become: yes
+  
+  tasks:
+  - name: update repository index
+    apt:
+      update-cache: yes
+
+  - name: remove apache2 package
+    apt:
+      name: apache2
+      autoremove: yes
+      state: absent
+
+  - name: remove php support for apache
+    apt:
+      name: libapache2-mod-php
+      state: absent
